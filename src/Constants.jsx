@@ -2,8 +2,6 @@ export const figuresArr = [
       //  XX
       //  XX
       {
-        x: 4,
-        y: 0,
         x0: 0.5,
         y0: 0.5,
         cells: [
@@ -18,8 +16,6 @@ export const figuresArr = [
       // X
       // X
       {
-        x: 4,
-        y: 0,
         x0: 0,
         y0: 2,
         cells: [
@@ -34,8 +30,6 @@ export const figuresArr = [
       // X
       // X
       {
-        x: 4,
-        y: 0,
         x0: 0,
         y0: 1,
         cells: [
@@ -49,15 +43,13 @@ export const figuresArr = [
       //  X
       //  X
       {
-        x: 4,
-        y: 0,
-        x0: 0,
+        x0: 1,
         y0: 1,
         cells: [
-          { x: 0, y: 0, value: { filled: true, color: "#FF0000" } },
-          { x: -1, y: 0, value: { filled: true, color: "#00FF00" } },
-          { x: 0, y: 1, value: { filled: true, color: "#0000FF" } },
-          { x: 0, y: 2, value: { filled: true, color: "#FF00FF" } },
+          { x: 1, y: 0, value: { filled: true, color: "#FF0000" } },
+          { x: 0, y: 0, value: { filled: true, color: "#00FF00" } },
+          { x: 1, y: 1, value: { filled: true, color: "#0000FF" } },
+          { x: 1, y: 2, value: { filled: true, color: "#FF00FF" } },
         ],
       },
 
@@ -65,8 +57,6 @@ export const figuresArr = [
       //  XX
 
       {
-        x: 4,
-        y: 0,
         x0: 1,
         y0: 0,
         cells: [
@@ -81,8 +71,6 @@ export const figuresArr = [
       //XX
 
       {
-        x: 4,
-        y: 0,
         x0: 1,
         y0: 1,
         cells: [
@@ -97,8 +85,6 @@ export const figuresArr = [
       // X
 
       {
-        x: 4,
-        y: 0,
         x0: 1,
         y0: 0,
         cells: [

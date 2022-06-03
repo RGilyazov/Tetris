@@ -8,7 +8,7 @@ function App() {
   function getRandomColor() {
     return colorsArr[Math.floor(Math.random() * colorsArr.length)];
   }
-  function getNewFigure() {
+  function getNewFigure(cols) {
     const figNum = Math.floor(Math.random() * figuresArr.length);
     const color = getRandomColor();
     return {
@@ -17,6 +17,8 @@ function App() {
         ...cell,
         value: { ...cell.value, color: color },
       })),
+      x: Math.floor((cols - 2) / 2),
+      y: 0,
     };
   }
 
@@ -39,6 +41,15 @@ function App() {
     }
     return result;
   }
+
+  const [state, setState] = React.useState({
+    rows: 20,
+    cols: 10,
+    glass: getEmptyGlass(20, 10),
+    figure: getNewFigure(10),
+    nextFigure: getNewFigure(10),
+    score: 0,
+  });
 
   function copyGlass(glass) {
     const newGlass = [];
@@ -109,11 +120,25 @@ function App() {
           figure: newFigure,
         };
       else if (dy > 0) {
-        return {
-          ...prevState,
-          figure: getNewFigure(),
-          glass: getClearedGlass(putFigure(prevState.figure, prevState.glass)),
-        };
+        if (prevState.figure.y === 0) {
+          return {
+            ...prevState,
+            figure: prevState.nextFigure,
+            nextFigure: getNewFigure(state.cols),
+            glass: getEmptyGlass(prevState.rows, prevState.cols),
+          };
+        } else {
+          let { glass: newGlass, add_score } = getClearedGlass(
+            putFigure(prevState.figure, prevState.glass)
+          );
+          return {
+            ...prevState,
+            figure: prevState.nextFigure,
+            nextFigure: getNewFigure(state.cols),
+            glass: newGlass,
+            score: prevState.score + add_score,
+          };
+        }
       } else {
         return prevState;
       }
@@ -121,15 +146,17 @@ function App() {
   }
 
   function getClearedGlass(glass) {
+    let add_score = 0;
     const newGlass = [];
     for (let i = 0; i < glass.length; i++) {
       if (!glass[i].every((cell) => cell.filled === true)) {
         newGlass.push(copyRow(glass[i]));
       } else {
         newGlass.unshift(getEmptyRow(glass[i].length));
+        add_score += 1;
       }
     }
-    return newGlass;
+    return { glass: newGlass, add_score: add_score };
   }
 
   function handleUserKeyPress(event) {
@@ -151,13 +178,6 @@ function App() {
     }
   }
 
-  const [state, setState] = React.useState({
-    rows: 20,
-    cols: 10,
-    glass: getEmptyGlass(20, 10),
-    figure: getNewFigure(),
-  });
-
   React.useEffect(() => {
     window.addEventListener("keydown", handleUserKeyPress);
     return () => {
@@ -178,9 +198,15 @@ function App() {
         <Glass
           value={{
             glass: putFigure(state.figure, state.glass),
-            maxWidth: 500,
-            maxHight: 500,
+            maxWidth: window.innerWidth,
+            maxHight: window.innerHeight,
+            score: state.score,
           }}
+          preview={false}
+          previewGlass={putFigure(
+            { ...state.nextFigure, x: 0 },
+            getEmptyGlass(4, 3)
+          )}
         />
       </header>
     </div>
