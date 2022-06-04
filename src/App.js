@@ -204,6 +204,8 @@ function App() {
 
   function handleTouchStart(event) {
     const x = event.changedTouches[0].clientX;
+    event.stopPropagation();
+    event.preventDefault();
 
     if (x < window.innerWidth * touchZoneSize) moveFigure(-1, 0, false);
     else if (x > window.innerWidth * (1 - touchZoneSize))
