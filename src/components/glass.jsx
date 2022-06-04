@@ -27,6 +27,7 @@ export default function Glass (props){
                          <Message message={['GAME OVER',  `YOUR SCORE ${props.lastScore}`, `SPEED ${props.lastSpeed}`]}/>}
                           
                      {rows}
+
                </div>
             {!props.preview && <div><Info  width={cellSize*3+10} score={props.value.score} speed={props.value.speed}></Info>
                <Glass
