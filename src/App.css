@@ -35,7 +35,8 @@
 
 .glass--outer {
   margin: 20px;
-  display: flex;
+  display: flex;  
+  
 }
 
 .infoBadge {
@@ -59,4 +60,8 @@
       
     color: red;
     font-size: xx-large;
+}
+
+.glass--preview{
+  display: flex;
 }
