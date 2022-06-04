@@ -191,16 +191,16 @@ function App() {
   function handleUserKeyPress(event) {
     switch (event.key) {
       case "ArrowUp":
-        moveFigure(0, 0, true);
+        setAction("Rotate");
         break;
       case "ArrowDown":
-        moveFigure(0, 1, false);
+        setAction("MoveDown");
         break;
       case "ArrowLeft":
-        moveFigure(-1, 0, false);
+        setAction("MoveLeft");
         break;
       case "ArrowRight":
-        moveFigure(1, 0, false);
+        setAction("MoveRight");
         break;
       case " ":
         togglePause();
@@ -249,11 +249,20 @@ function App() {
   });
 
   React.useEffect(() => {
+    const clearAction = () => setAction("");
+    window.addEventListener("keyup", clearAction);
+    return () => {
+      window.removeEventListener("keyup", clearAction);
+    };
+  });
+
+  React.useEffect(() => {
+    makeAction();
     let interval = window.setInterval(() => makeAction(), sensitivity);
     return () => {
       window.clearInterval(interval);
     };
-  });
+  }, [action]);
 
   React.useEffect(() => {
     let interval = window.setInterval(
