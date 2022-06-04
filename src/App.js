@@ -217,6 +217,7 @@ function App() {
     return () => {
       window.clearInterval(interval);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.speed]);
 
   return (
