@@ -2,7 +2,13 @@ import "./App.css";
 import Glass from "./components/glass";
 import React from "react";
 import shortid from "shortid";
-import { figuresArr, colorsArr, touchZoneSize } from "./Constants";
+import {
+  figuresArr,
+  colorsArr,
+  touchZoneSizeX,
+  sensitivity,
+  touchZoneSizeY,
+} from "./Constants";
 
 function App() {
   function getRandomColor() {
@@ -55,6 +61,8 @@ function App() {
     lastScore: 0,
     lastSpeed: 1,
   });
+
+  const [action, setAction] = React.useState("");
 
   function togglePause() {
     setState((prevState) => {
@@ -202,21 +210,48 @@ function App() {
     }
   }
 
+  function makeAction() {
+    switch (action) {
+      case "Rotate":
+        moveFigure(0, 0, true);
+        break;
+      case "MoveDown":
+        moveFigure(0, 1, false);
+        break;
+      case "MoveLeft":
+        moveFigure(-1, 0, false);
+        break;
+      case "MoveRight":
+        moveFigure(1, 0, false);
+        break;
+      default:
+        break;
+    }
+  }
+
   function handleTouchStart(event) {
     const x = event.changedTouches[0].clientX;
+    const y = event.changedTouches[0].clientY;
     event.stopPropagation();
     event.preventDefault();
-
-    if (x < window.innerWidth * touchZoneSize) moveFigure(-1, 0, false);
-    else if (x > window.innerWidth * (1 - touchZoneSize))
-      moveFigure(1, 0, false);
-    else moveFigure(0, 0, true);
+    if (y > window.innerHeight * (1 - touchZoneSizeY)) setAction("MoveDown");
+    else if (x < window.innerWidth * touchZoneSizeX) setAction("MoveLeft");
+    else if (x > window.innerWidth * (1 - touchZoneSizeX))
+      setAction("MoveRight");
+    else setAction("Rotate");
   }
 
   React.useEffect(() => {
     window.addEventListener("keydown", handleUserKeyPress);
     return () => {
       window.removeEventListener("keydown", handleUserKeyPress);
+    };
+  });
+
+  React.useEffect(() => {
+    let interval = window.setInterval(() => makeAction(), sensitivity);
+    return () => {
+      window.clearInterval(interval);
     };
   });
 
@@ -235,6 +270,14 @@ function App() {
     window.addEventListener("touchstart", handleTouchStart);
     return () => {
       window.removeEventListener("touchstart", handleTouchStart);
+    };
+  });
+
+  React.useEffect(() => {
+    const clearAction = () => setAction("");
+    window.addEventListener("touchend", clearAction);
+    return () => {
+      window.removeEventListener("touchend", clearAction);
     };
   });
 

@@ -1,5 +1,6 @@
-export const touchZoneSize = 0.25
-
+export const touchZoneSizeX = 0.25
+export const touchZoneSizeY = 0.2
+export const sensitivity = 100
 export const figuresArr = [
       //  XX
       //  XX
