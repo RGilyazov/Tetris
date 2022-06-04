@@ -1,12 +1,13 @@
 import React from "react";
+import InfoBadge from './infoBadge'
 
 export default function Info(props){
 
     const style ={
-        width: `${props.width}px`,
-        height: `${80}px`
-    }
-    return <div style={style} className='cell--outer'> 
-            <h1>{props.score}</h1>
+        width: `${props.width}px`
+      }
+    return <div style={style} className='info'>
+            <InfoBadge value = {props.score} description = 'SCORE' /> 
+            <InfoBadge value = {props.speed} description = 'SPEED' /> 
            </div>
 }

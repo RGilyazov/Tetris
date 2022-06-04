@@ -49,7 +49,19 @@ function App() {
     figure: getNewFigure(10),
     nextFigure: getNewFigure(10),
     score: 0,
+    speed: 1,
+    pause: false,
+    gameOver: false,
+    lastScore: 0,
+    lastSpeed: 1,
   });
+
+  function togglePause() {
+    setState((prevState) => {
+      console.log(prevState);
+      return { ...prevState, pause: !prevState.pause, gameOver: false };
+    });
+  }
 
   function copyGlass(glass) {
     const newGlass = [];
@@ -113,6 +125,7 @@ function App() {
 
   function moveFigure(dx, dy, rotate) {
     setState((prevState) => {
+      if (prevState.pause) return prevState;
       const newFigure = getMovedFigure(prevState.figure, dx, dy, rotate);
       if (isValidPosition(newFigure, prevState.glass))
         return {
@@ -126,17 +139,25 @@ function App() {
             figure: prevState.nextFigure,
             nextFigure: getNewFigure(state.cols),
             glass: getEmptyGlass(prevState.rows, prevState.cols),
+            lastScore: prevState.score,
+            lastSpeed: prevState.speed,
+            speed: 1,
+            score: 0,
+            gameOver: true,
+            pause: true,
           };
         } else {
           let { glass: newGlass, add_score } = getClearedGlass(
             putFigure(prevState.figure, prevState.glass)
           );
+
           return {
             ...prevState,
             figure: prevState.nextFigure,
             nextFigure: getNewFigure(state.cols),
             glass: newGlass,
             score: prevState.score + add_score,
+            speed: 1 + Math.floor((prevState.score + add_score) / 20),
           };
         }
       } else {
@@ -173,6 +194,9 @@ function App() {
       case "ArrowRight":
         moveFigure(1, 0, false);
         break;
+      case " ":
+        togglePause();
+        break;
       default:
         break;
     }
@@ -186,11 +210,14 @@ function App() {
   }, []);
 
   React.useEffect(() => {
-    let interval = window.setInterval(() => moveFigure(0, 1), 1000);
+    let interval = window.setInterval(
+      () => moveFigure(0, 1),
+      1000 / state.speed
+    );
     return () => {
       window.clearInterval(interval);
     };
-  }, []);
+  }, [state.speed]);
 
   return (
     <div className="App">
@@ -201,7 +228,12 @@ function App() {
             maxWidth: window.innerWidth,
             maxHight: window.innerHeight,
             score: state.score,
+            speed: state.speed,
           }}
+          pause={state.pause}
+          gameOver={state.gameOver}
+          lastScore={state.lastScore}
+          lastSpeed={state.lastSpeed}
           preview={false}
           previewGlass={putFigure(
             { ...state.nextFigure, x: 0 },

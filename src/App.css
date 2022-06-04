@@ -30,9 +30,33 @@
 .glass--inner {
   border: 5px solid;
   border-top: none;
+  position: relative;
 }
 
 .glass--outer {
   margin: 20px;
   display: flex;
+}
+
+.infoBadge {
+  text-align: center;
+  border-radius: 8px;
+  border: 2px solid;
+  margin: 5px;
+  width: 100%;
+  font-size: larger;
+  background-color:#42aaf5;
+  color: white;
+  border-color: black;
+  padding: 2px;
+}
+
+.message{
+  position: absolute;
+     width: 100%;
+    top: 45%;
+    text-align: center;
+      
+    color: red;
+    font-size: xx-large;
 }
