@@ -8,7 +8,7 @@ export default function Glass (props){
     const rowsCount = glass.length;
     const colsCount = glass[0].length;
     const addCols = props.preview ? 0:3;
-    const margin = props.preview ? 0:40;
+    const margin = props.preview ? 0:60;
     
     let cellSize = Math.min((props.value.maxWidth-margin) / (colsCount+addCols), (props.value.maxHight-margin) / rowsCount);
     cellSize = Math.floor(cellSize);
