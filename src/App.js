@@ -207,7 +207,7 @@ function App() {
     return () => {
       window.removeEventListener("keydown", handleUserKeyPress);
     };
-  }, []);
+  });
 
   React.useEffect(() => {
     let interval = window.setInterval(
