@@ -22,7 +22,7 @@ export default function Glass (props){
     
     return <div className='glass--outer'>  
                <div className={props.preview?'':'glass--inner'} style={style}>
-                     {!props.preview && props.pause && !props.gameOver && <Message message={['PAUSE']}/>}
+                     {!props.preview && props.pause && !props.gameOver && <Message message={['TEST']}/>}
                      {!props.preview && props.gameOver && 
                          <Message message={['GAME OVER',  `YOUR SCORE ${props.lastScore}`, `SPEED ${props.lastSpeed}`]}/>}
                           
