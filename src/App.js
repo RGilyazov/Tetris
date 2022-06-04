@@ -2,7 +2,7 @@ import "./App.css";
 import Glass from "./components/glass";
 import React from "react";
 import shortid from "shortid";
-import { figuresArr, colorsArr } from "./Constants";
+import { figuresArr, colorsArr, touchZoneSize } from "./Constants";
 
 function App() {
   function getRandomColor() {
@@ -202,6 +202,15 @@ function App() {
     }
   }
 
+  function handleTouchStart(event) {
+    const x = event.changedTouches[0].clientX;
+
+    if (x < window.innerWidth * touchZoneSize) moveFigure(-1, 0, false);
+    else if (x > window.innerWidth * (1 - touchZoneSize))
+      moveFigure(1, 0, false);
+    else moveFigure(0, 0, true);
+  }
+
   React.useEffect(() => {
     window.addEventListener("keydown", handleUserKeyPress);
     return () => {
@@ -219,6 +228,13 @@ function App() {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.speed]);
+
+  React.useEffect(() => {
+    window.addEventListener("touchstart", handleTouchStart);
+    return () => {
+      window.removeEventListener("touchstart", handleTouchStart);
+    };
+  });
 
   return (
     <div className="App">

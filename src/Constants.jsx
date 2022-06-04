@@ -1,3 +1,5 @@
+export const touchZoneSize = 0.25
+
 export const figuresArr = [
       //  XX
       //  XX
