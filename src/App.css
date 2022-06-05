@@ -31,10 +31,10 @@
   border: 5px solid;
   border-top: none;
   position: relative;
+  margin: 20px;
 }
 
 .glass--outer {
-  margin: 20px;
   display: flex;  
   
 }
@@ -43,9 +43,9 @@
   text-align: center;
   border-radius: 8px;
   border: 2px solid;
-  margin: 5px;
+  margin: 0px 0px 5px 0px;
   width: 100%;
-  font-size: larger;
+  font-size: 4vmin;
   background-color:#42aaf5;
   color: white;
   border-color: black;
@@ -64,4 +64,15 @@
 
 .glass--preview{
   display: flex;
+ 
+}
+
+.glass--preview--bottom{
+  justify-content: space-around;
+  margin: 0px 20px 0px 20px;
+}
+
+.glass--preview--right {
+  justify-content:  flex-start;
+  margin-top: 20px;
 }

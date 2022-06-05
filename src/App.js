@@ -14,6 +14,7 @@ function App() {
   function getRandomColor() {
     return colorsArr[Math.floor(Math.random() * colorsArr.length)];
   }
+
   function getNewFigure(cols) {
     const figNum = Math.floor(Math.random() * figuresArr.length);
     const color = getRandomColor();
@@ -237,6 +238,7 @@ function App() {
     event.stopPropagation();
     event.preventDefault();
     if (y > window.innerHeight * (1 - touchZoneSizeY)) setAction("MoveDown");
+    else if (y < window.innerHeight * touchZoneSizeY) togglePause();
     else if (x < window.innerWidth * touchZoneSizeX) setAction("MoveLeft");
     else if (x > window.innerWidth * (1 - touchZoneSizeX))
       setAction("MoveRight");
