@@ -36,7 +36,9 @@
 
 .glass--outer {
   display: flex;  
-  
+}
+body {
+    margin: 0px;
 }
 
 .infoBadge {

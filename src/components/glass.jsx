@@ -31,7 +31,7 @@ export default function Glass (props){
     const style={width: `${cellSize *colsCount }px`,
            height: `${cellSize * rowsCount}px`}
 
-    const margin_left = direction ==='row'? 20: (props.value.maxWidth - 50 - cellSize * colsCount)/2
+    const margin_left = direction ==='row'? 5: (props.value.maxWidth - 50 - cellSize * colsCount)/2
     
     return <div className='glass--outer' style={{'flex-direction': direction, 'margin-left': margin_left}}>  
                <div className={props.preview?'':'glass--inner'} style={style}>
