@@ -7,7 +7,7 @@ export default function Info(props){
         width: `${props.width}px`
       }
     return <div style={style} className='info'>
-            <InfoBadge value = {props.score} description = 'SCORE' /> 
-            <InfoBadge value = {props.speed} description = 'SPEED' /> 
+            <InfoBadge value = {props.score} width={props.width} description = 'SCORE' /> 
+            <InfoBadge value = {props.speed} width={props.width}description = 'SPEED' /> 
            </div>
 }

@@ -31,7 +31,7 @@ export default function Glass (props){
     const style={width: `${cellSize *colsCount }px`,
            height: `${cellSize * rowsCount}px`}    
     
-    return <div className={`glass--outer  glass--outer--${direction==='row'?'right': 'bottom'}`} style={{'flex-direction': direction}}>  
+    return <div className={`glass--outer  glass--outer--${direction==='row'?'right': 'bottom'}`} style={{'flexDirection': direction}}>  
                <div className={props.preview?'':'glass--inner'} style={style}>
                      {!props.preview && props.pause && !props.gameOver && <Message message={['PAUSE']}/>}
                      {!props.preview && props.gameOver && 
@@ -40,8 +40,8 @@ export default function Glass (props){
                      {rows}
 
                </div>
-            {!props.preview && <div className={`glass--preview glass--preview--${direction==='row'?'right': 'bottom'}`}  style={{'flex-direction': direction ==='row'?'column':'row'}}>
-                                   <Info  width={cellSize*3+10} score={props.value.score} speed={props.value.speed}></Info>
+            {!props.preview && <div className={`glass--preview glass--preview--${direction==='row'?'right': 'bottom'}`}  style={{'flexDirection': direction ==='row'?'column':'row'}}>
+                                   <Info  width={cellSize*3+10}  score={props.value.score} speed={props.value.speed}></Info>
                                    <Glass
                                    value={{
                                    glass: props.previewGlass,
