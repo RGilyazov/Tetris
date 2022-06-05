@@ -159,6 +159,8 @@ function App() {
             putFigure(prevState.figure, prevState.glass)
           );
 
+          setAction("");
+
           return {
             ...prevState,
             figure: prevState.nextFigure,
