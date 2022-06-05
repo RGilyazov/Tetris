@@ -22,7 +22,7 @@ export default function Glass (props){
     cellSizeByCols =(props.value.maxWidth-margin) / (colsCount + addCols);
     
     let cellSize = Math.min(cellSizeByRows, cellSizeByCols);
-    cellSize = Math.floor(cellSize);
+    cellSize = Math.floor(cellSize)-1;
     const rowValue = {cellSize: cellSize}
 
     const rows = glass.map(row=> <Row key={row.id} value={{...rowValue, row:row}}/>)
