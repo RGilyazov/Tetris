@@ -301,8 +301,8 @@ function App() {
         <Glass
           value={{
             glass: putFigure(state.figure, state.glass),
-            maxWidth: window.innerWidth,
-            maxHight: window.innerHeight,
+            maxWidth: Math.min(window.innerWidth, window.screen.width),
+            maxHight: Math.min(window.innerHeight, window.screen.height),
             score: state.score,
             speed: state.speed,
           }}
