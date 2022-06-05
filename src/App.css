@@ -35,10 +35,16 @@
 }
 
 .glass--outer {
-  display: flex;  
+  display: flex; 
+  
+  
 }
-body {
-    margin: 0px;
+ .glass--outer--right{
+   justify-content: center;
+ }
+
+.glass--outer--bottom{
+  align-items: stretch;
 }
 
 .infoBadge {
