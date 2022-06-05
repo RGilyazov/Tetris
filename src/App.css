@@ -35,8 +35,7 @@
 }
 
 .glass--outer {
-  display: flex; 
-  
+  display: flex;   
   
 }
  .glass--outer--right{
@@ -44,7 +43,8 @@
  }
 
 .glass--outer--bottom{
-  align-items: stretch;
+  align-items: center;
+  
 }
 
 .infoBadge {
@@ -78,6 +78,8 @@
 .glass--preview--bottom{
   justify-content: space-around;
   margin: 0px 20px 0px 20px;
+  width: 100%;
+  
 }
 
 .glass--preview--right {
