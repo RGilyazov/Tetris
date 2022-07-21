@@ -250,7 +250,8 @@ function App() {
     return () => {
       window.removeEventListener("keydown", handleUserKeyPress);
     };
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   React.useEffect(() => {
     const clearAction = () => setAction("");
@@ -258,7 +259,8 @@ function App() {
     return () => {
       window.removeEventListener("keyup", clearAction);
     };
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   React.useEffect(() => {
     makeAction();
@@ -285,7 +287,8 @@ function App() {
     return () => {
       window.removeEventListener("touchstart", handleTouchStart);
     };
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   React.useEffect(() => {
     const clearAction = () => setAction("");
@@ -293,7 +296,7 @@ function App() {
     return () => {
       window.removeEventListener("touchend", clearAction);
     };
-  });
+  }, []);
 
   return (
     <div className="App">
